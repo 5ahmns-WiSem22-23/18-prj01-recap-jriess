@@ -23,4 +23,14 @@ public class PlayerMovement : MonoBehaviour
         Vector2 input = new Vector2(floatX, floatY);
         return input;
     }
+
+    private void Move(float velocity, Rigidbody2D rbToMove)
+    {
+        rbToMove.velocity = new Vector2(rbToMove.velocity.x, velocity);
+    }
+
+    void Rotate(float amount, Transform transformToRotate)
+    {
+        
+    }
 }
