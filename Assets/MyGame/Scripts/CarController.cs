@@ -69,7 +69,16 @@ public class CarController : MonoBehaviour
         float speedAllowingToTurn = (rbCar.velocity.magnitude / 8);
         speedAllowingToTurn = Mathf.Clamp01(speedAllowingToTurn);
 
-        rotationAngle -= steeringInput * turnFactor * speedAllowingToTurn;
+        
+
+        if(Vector2.Dot(transform.up, rbCar.velocity) > 0)
+        {
+            rotationAngle -= steeringInput * turnFactor * speedAllowingToTurn;
+        }
+        else if(Vector2.Dot(transform.up, rbCar.velocity) < 0)
+        {
+            rotationAngle -= steeringInput * -turnFactor * speedAllowingToTurn;
+        }
 
         rbCar.MoveRotation(rotationAngle);
     }
