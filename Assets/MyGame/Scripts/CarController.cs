@@ -1,11 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
     [SerializeField] float accelerationFactor;
+    [SerializeField] float baseAccelerationFactor;
     [SerializeField] float turnFactor;
     [SerializeField] float driftFactor;
     [SerializeField] float maxSpeed;
+    [SerializeField] float baseMaxSpeed;
+    [SerializeField] float boostAmount;
+    [SerializeField] float maxSpeedBoost;
 
     float accelerationInput;
     float steeringInput;
@@ -15,10 +21,13 @@ public class CarController : MonoBehaviour
     float velocityForward;
 
     Rigidbody2D rbCar;
+    Vector2 forceVector;
 
     private void Awake()
     {
         rbCar = GetComponent<Rigidbody2D>();
+        baseAccelerationFactor = accelerationFactor;
+        baseMaxSpeed = maxSpeed;
     }
 
     private void FixedUpdate()
@@ -58,7 +67,7 @@ public class CarController : MonoBehaviour
             rbCar.drag = 0;
         }
 
-        Vector2 forceVector = transform.up * accelerationInput * accelerationFactor;
+        forceVector = transform.up * accelerationInput * accelerationFactor;
         rbCar.AddForce(forceVector, ForceMode2D.Force);
     }
 
@@ -93,5 +102,18 @@ public class CarController : MonoBehaviour
         Vector2 rightVelocity = transform.right * Vector2.Dot(rbCar.velocity, transform.right);
 
         rbCar.velocity = forwardVelocity + rightVelocity * driftFactor;
+    }
+
+    IEnumerator Boost()
+    {
+        yield return new WaitForSeconds(0.3f);        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Boost")
+        {
+            StartCoroutine(Boost());
+        }
     }
 }
