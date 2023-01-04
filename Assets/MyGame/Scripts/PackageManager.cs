@@ -14,6 +14,6 @@ public class PackageManager : MonoBehaviour
 
     public void SpawnPackage(Transform[] possibleSpawnpoints, GameObject package)
     {
-        Instantiate(package, packageSpawnPoints[Random.Range(0, packageSpawnPoints.Length)]);
+        Instantiate(package, packageSpawnPoints[Random.Range(0, packageSpawnPoints.Length)].position, Quaternion.identity);
     }
 }

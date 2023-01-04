@@ -106,7 +106,12 @@ public class CarController : MonoBehaviour
 
     IEnumerator Boost()
     {
-        yield return new WaitForSeconds(0.3f);        
+        maxSpeed = maxSpeedBoost;
+        Vector2 currentVector = rbCar.velocity;
+        currentVector.Normalize();
+        rbCar.velocity = currentVector * boostAmount;
+        yield return new WaitForSeconds(0.16f);
+        maxSpeed = baseMaxSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
