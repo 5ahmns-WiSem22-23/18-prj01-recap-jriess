@@ -18,4 +18,4 @@ Es ist Weihnachten und es gibt im ganzen Land Geschenke. Sammle so viel wie mög
 | Visual Studio Code Editor | com.unity.ide.vscode | 1.2.4 |
 | Visual Studio Editor | com.unity.ide.visualstudio | 2.0.11 |
 
-Generated with:
+Generated with: https://timtoller.github.io/unity-manifest-to-markdown/
